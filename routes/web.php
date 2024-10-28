@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Requests\CreateTaskFormRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('result');
+})->name('home');
+
+Route::get('/create-task', function () {
+    return view('create_task');
+})->name('task.create');
+
+Route::post('/create-task', function (CreateTaskFormRequest $request) {
+    session()->flash('success', 'Thêm thành công!');
+    return redirect()->route('home');
+})->name('task.store');
