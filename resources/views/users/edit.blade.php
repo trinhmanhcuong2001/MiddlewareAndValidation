@@ -1,33 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-
-<body>
-    @if ($errors->any())
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+@extends('layout')
+@section('content')
+    @include('alert')
     <form action="{{ route('user.update', $user->id) }}" method="post">
         @csrf
         @method('PUT')
-        <input type="text" name="name" placeholder="Nhập tên" value="{{ $user->name }}">
-        <input type="text" name="email" placeholder="Nhập email" value="{{ $user->email }}">
-        <input type="password" name="password" placeholder="Nhập mật khẩu">
-        <select name="role">
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-        </select>
-        <button type="submit">Cập nhật</button>
+        <legend>Update User</legend>
+        <div class="mb-3">
+            <label for="nameTextInput" class="form-label">Name</label>
+            <input type="text" id="nameTextInput" class="form-control" placeholder="Enter name" value="{{ $user->name }}"
+                name="name">
+        </div>
+        <div class="mb-3">
+            <label for="emailTextInput" class="form-label">Email</label>
+            <input type="text" id="emailTextInput" class="form-control" placeholder="Enter email"
+                value="{{ $user->email }}" name="email">
+        </div>
+        <div class="mb-3">
+            <label for="passwordTextInput" class="form-label">Password</label>
+            <input type="password" id="emailTextInput" class="form-control" placeholder="Enter password" name="password">
+        </div>
+        <div class="mb-3">
+            <label for="roledSelect" class="form-label">Quyền</label>
+            <select id="roleSelect" class="form-select" name="role">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-</body>
-
-</html>
+@endsection

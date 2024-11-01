@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginFormRequest;
 use App\Http\Requests\RegisterUserForm;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
@@ -20,7 +21,7 @@ class UserController extends Controller
         return view('login');
     }
 
-    public function postLogin(Request $request)
+    public function postLogin(LoginFormRequest $request)
     {
         $data = [
             'email' => $request->email,
@@ -30,9 +31,12 @@ class UserController extends Controller
         if (Auth::attempt($data)) {
             return redirect()->route('home');
         }
+        session()->flash('error', 'Thông tài khoản hoặc mật khẩu không chính xác!');
+        return redirect()->back();
     }
     public function index()
     {
+        // dd(User::all());
         $users = User::all();
         return view('users.index', [
             'users' => $users
@@ -49,6 +53,10 @@ class UserController extends Controller
         $data = $request->all();
         $data['password'] = Hash::make($request->password);
         User::create($data);
+        Auth::attempt([
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
         return redirect()->route('home');
     }
 

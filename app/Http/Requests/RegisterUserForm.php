@@ -31,15 +31,24 @@ class RegisterUserForm extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Tên không được để trống.',
-            'name.string' => 'Tên phải là chuỗi ký tự.',
-            'name.max' => 'Tên không được vượt quá 255 ký tự.',
-            'email.required' => 'Email không được để trống.',
-            'email.email' => 'Email phải có định dạng hợp lệ.',
-            'email.unique' => 'Email đã tồn tại trong hệ thống.',
-            'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',
-            'password.regex' => 'Mật khẩu phải bao gồm chữ hoa, chữ thường.',
-            'password.required' => 'Mật khẩu không được để trống.'
+            'name.required' => ':attribute không được để trống.',
+            'name.string' => ':attribute phải là chuỗi ký tự.',
+            'name.max' => ':attribute không được vượt quá 255 ký tự.',
+            'email.required' => ':attribute không được để trống.',
+            'email.email' => ':attribute phải có định dạng hợp lệ.',
+            'email.unique' => ':attribute đã tồn tại trong hệ thống.',
+            'password.min' => ':attribute phải có ít nhất 8 ký tự.',
+            'password.regex' => ':attribute phải bao gồm chữ hoa, chữ thường.',
+            'password.required' => ':attribute không được để trống.'
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'Tên',
+            'email' => 'Email',
+            'password' => 'Mật khẩu',
         ];
     }
 }

@@ -20,7 +20,7 @@ Route::get('/register', [UserController::class, 'register'])->name('register');
 Route::post('/register', [UserController::class, 'postRegister'])->name('postRegister');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::get('/', [UserController::class, 'home'])->name('home')->middleware('role:user,admin');
+Route::get('/', [UserController::class, 'home'])->name('home');
 
 Route::middleware(['role:admin'])->group(function () {
     Route::get('/user/index', [UserController::class, 'index'])->name('user.index');

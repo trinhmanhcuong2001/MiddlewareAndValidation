@@ -17,7 +17,8 @@ class RoleMiddleware
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
         if (Auth::check()) {
-            if (in_array(Auth::user()->role, $roles)) {
+            // dd(Auth::user()->getRawOriginal(key: 'role'));
+            if (in_array(Auth::user()->getRawOriginal('role'), $roles)) {
                 return $next($request);
             }
             session()->flash('error', 'Bạn không có đủ quyền');

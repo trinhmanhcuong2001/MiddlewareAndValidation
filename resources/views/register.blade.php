@@ -1,28 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-
-<body>
-    @if ($errors->any())
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
-    <form action="{{ route('postRegister') }}" method="POST">
+@extends('layout')
+@section('content')
+    @include('alert')
+    <h1 class="text-center">Đăng ký</h1>
+    <form action="{{ route('postRegister') }}" method="post">
         @csrf
-        <input type="text" name="name" placeholder="Nhập tên của bạn">
-        <input type="text" name="email" placeholder="Nhập email của bạn">
-        <input type="password" name="password" placeholder="Nhập mật khẩu của bạn">
-        <button type="submit">Đăng ký</button>
+        <div class="mb-3">
+            <label for="exampleInputName1" class="form-label">Name</label>
+            <input type="text" class="form-control" id="exampleInputName1" aria-describedby="nameHelp" name="name">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+        </div>
+        <p>Bạn đã có tài khoản? <a href="{{ route('login') }}">Đăng nhập!</a></p>
+        <button type="submit" class="btn btn-primary">Đăng ký</button>
     </form>
-</body>
-
-</html>
+@endsection
